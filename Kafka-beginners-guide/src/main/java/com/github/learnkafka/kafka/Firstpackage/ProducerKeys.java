@@ -35,7 +35,7 @@ public class ProducerKeys {
         //Create a Producer Record to be send
         {
             topicvalue = topicvalue + " " + Integer.toString(i);
-            String topicKey = "Id_" + Integer.toString(i);
+            final String topicKey = "Id_" + Integer.toString(i);
             ProducerRecord<String, String> producerRecord = new ProducerRecord<String, String>( topicname, topicKey, topicvalue);
             //Send data in the producer
             producer.send(producerRecord, new Callback() {
@@ -48,10 +48,10 @@ public class ProducerKeys {
                         System.out.println(recordMetadata.timestamp());
                         */
 
-                        logger.info("Offset->" + recordMetadata.offset() + "\n" +
+                        logger.info("\n Offset->" + recordMetadata.offset() + "\n" +
                         "Timestamp->" + recordMetadata.timestamp() + "\n"  +
                         "Partition->" + recordMetadata.partition() + "\n" +
-                        "topic->" + recordMetadata.topic() + "\n");
+                        "topic->" + recordMetadata.topic() + "\n" + " Key Value :" + topicKey );
                     } else {
                         System.out.println(e.fillInStackTrace());
                         logger.info("Error Message :" + e.getStackTrace());
